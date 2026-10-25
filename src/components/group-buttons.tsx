@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { CONSENT_KEY, saveConsent } from "@/lib/meta-pixel";
 import { WHATSAPP_GROUP_URL, trackLeadOnce } from "@/lib/meta-lead";
 import { countMetric } from "@/lib/metrics";
 
@@ -11,6 +14,25 @@ function WhatsAppIcon() {
 }
 
 export function GroupButtons() {
+  const [measurementAllowed, setMeasurementAllowed] = useState(false);
+  const [privacyControlEnabled, setPrivacyControlEnabled] = useState(false);
+
+  useEffect(() => {
+    try {
+      setMeasurementAllowed(window.localStorage.getItem(CONSENT_KEY) === "granted");
+    } catch {
+      setMeasurementAllowed(false);
+    }
+    setPrivacyControlEnabled(
+      (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true,
+    );
+  }, []);
+
+  const changeMeasurementPermission = (allowed: boolean) => {
+    saveConsent(allowed ? "granted" : "denied");
+    setMeasurementAllowed(allowed);
+  };
+
   return (
     <div className="group-actions flex w-full flex-col gap-4">
       <div className="relative w-full pt-2">
@@ -21,6 +43,25 @@ export function GroupButtons() {
             <span>ENTRAR NO GRUPO COM VAGAS</span>
           </a>
         </Button>
+      </div>
+      <div className="flex items-start gap-2 px-2 text-left text-[11px] leading-snug text-muted-foreground">
+        <input
+          id="meta-permission"
+          type="checkbox"
+          className="mt-0.5 size-4 shrink-0 accent-amber-500"
+          checked={measurementAllowed && !privacyControlEnabled}
+          disabled={privacyControlEnabled}
+          onChange={(event) => changeMeasurementPermission(event.currentTarget.checked)}
+        />
+        <div>
+          <label htmlFor="meta-permission">
+            Autorizo a medição de visitas e cliques pelo Meta Pixel (opcional).
+          </label>{" "}
+          <Link to="/privacidade" className="underline underline-offset-2">
+            Privacidade
+          </Link>
+          {privacyControlEnabled && <span className="block">Seu navegador bloqueia a medição publicitária.</span>}
+        </div>
       </div>
       <div className="relative w-full pt-2">
         <span className="group-badge group-badge-full absolute left-1/2 top-0 -translate-x-1/2">LOTADO</span>
