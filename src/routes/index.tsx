@@ -27,7 +27,7 @@ function Index() {
           <span className="h-px w-10 bg-gold/60" /> PERFUMES MASCULINOS <span className="h-px w-10 bg-gold/60" />
         </p>
         <h1 className="font-display mt-6 text-[2.75rem] leading-[1.05] sm:text-5xl">
-          Seu próximo perfume original com até <span className="text-gold-gradient">60% de desconto</span>
+          Seu próximo perfume original com até <span className="text-gold-gradient block">60% de desconto</span>
         </h1>
         <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
           Receba ofertas selecionadas de perfumes masculinos direto no WhatsApp.
