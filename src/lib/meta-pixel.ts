@@ -1,8 +1,8 @@
 export const PIXEL_ID = "1391985675598607";
 export const CONSENT_KEY = "advertising_consent"; // "granted" | "denied"
 export const CONSENT_RECORD_KEY = "advertising_consent_record";
-export const CONSENT_NOTICE_VERSION = "2026-10-24-v1";
-export const CONSENT_NOTICE_TEXT = "Usamos cookies para medir visitas e melhorar nossos anúncios.";
+export const CONSENT_NOTICE_VERSION = "2026-10-25-v2";
+export const CONSENT_NOTICE_TEXT = "Com sua autorização opcional, usamos o Meta Pixel para medir visitas e cliques no WhatsApp e melhorar nossos anúncios.";
 export const CONSENT_EVENT = "radar:consent-needed";
 
 // Regions where advertising measurement needs the visitor's explicit acceptance.
