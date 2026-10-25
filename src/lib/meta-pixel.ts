@@ -1,4 +1,4 @@
-export const PIXEL_ID = "1104208202495234";
+export const PIXEL_ID = "1391985675598607";
 export const CONSENT_KEY = "advertising_consent"; // "granted" | "denied"
 export const CONSENT_RECORD_KEY = "advertising_consent_record";
 export const CONSENT_NOTICE_VERSION = "2026-10-24-v1";
