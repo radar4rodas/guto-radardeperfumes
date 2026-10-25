@@ -1,4 +1,4 @@
-import { PIXEL_ID, advertisingPermittedNow } from "./meta-pixel";
+import { PIXEL_ID } from "./meta-pixel";
 import { countMetric } from "./metrics";
 export { PIXEL_ID } from "./meta-pixel";
 export const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/GcNVB35EeMFGNIf8VlYAQV";
@@ -18,7 +18,6 @@ function newId() {
 /** Sends Lead synchronously on click (before the WhatsApp tab opens); never blocks or throws. */
 export function trackLeadOnce(): void {
   try {
-    if (!advertisingPermittedNow()) return;
     if (sentThisSession) return;
     try {
       if (window.localStorage.getItem(LEAD_STORAGE_KEY) === "sent") {
