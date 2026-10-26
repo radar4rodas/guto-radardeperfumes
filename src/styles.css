@@ -321,16 +321,18 @@
   display: block;
   width: 100%;
   max-width: 490px;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(29px, 7.3vw, 45px);
-  font-weight: 600;
-  line-height: .96;
-  letter-spacing: -.022em;
-  text-wrap: balance;
-  background: linear-gradient(180deg, #ffefbd 0%, #f0c570 45%, #c98735 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(18px, 5.15vw, 27px);
+  font-weight: 700;
+  line-height: 1.27;
+  letter-spacing: -.025em;
+  font-variant-numeric: lining-nums;
+  color: #f4ce80;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .58);
+}
+.vip-offer-line {
+  display: block;
+  white-space: nowrap;
 }
 .vip-hero-stage {
   position: relative;
@@ -549,12 +551,12 @@
 }
 @media (min-width: 650px) {
   .vip-headline-main { font-size: 65px; }
-  .vip-headline-offer { font-size: 45px; }
+  .vip-headline-offer { font-size: 27px; }
 }
 @media (max-width: 390px) {
   .vip-page { padding-left: 14px; padding-right: 14px; }
   .vip-headline-main { font-size: clamp(37px, 10.6vw, 43px); }
-  .vip-headline-offer { font-size: clamp(27px, 7.8vw, 32px); }
+  .vip-headline-offer { font-size: clamp(18px, 5.15vw, 20px); }
   .vip-countdown { border-radius: 15px; }
   .vip-hero-stage { width: calc(100% + 28px); margin-left: -14px; margin-right: -14px; }
   .vip-whatsapp-cta { gap: 10px; padding-inline: 11px; }
