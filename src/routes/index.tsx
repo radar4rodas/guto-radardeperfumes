@@ -1,16 +1,100 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import bottles from "@/assets/bottles.jpg.asset.json";
 import { GroupButtons } from "@/components/group-buttons";
-import { useEffect } from "react";
 import { countMetric, watchMetaPageView } from "@/lib/metrics";
+
+const COUNTDOWN_SECONDS = 120;
+const COUNTDOWN_STORAGE_KEY = "radar-perfumes-vip-countdown-deadline";
+
+function useVipCountdown() {
+  const [secondsLeft, setSecondsLeft] = useState(COUNTDOWN_SECONDS);
+
+  useEffect(() => {
+    const now = Date.now();
+    let deadline = now + COUNTDOWN_SECONDS * 1000;
+
+    // Keep the same two-minute countdown across reloads in this browser tab.
+    try {
+      const saved = Number(window.sessionStorage.getItem(COUNTDOWN_STORAGE_KEY));
+      if (Number.isFinite(saved) && saved > 0 && saved <= now + COUNTDOWN_SECONDS * 1000) {
+        deadline = saved;
+      } else {
+        window.sessionStorage.setItem(COUNTDOWN_STORAGE_KEY, String(deadline));
+      }
+    } catch {
+      // The timer still runs normally if browser storage is disabled.
+    }
+
+    const tick = () => {
+      setSecondsLeft(Math.max(0, Math.ceil((deadline - Date.now()) / 1000)));
+    };
+
+    tick();
+    const interval = window.setInterval(tick, 250);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  return {
+    minutes: String(Math.floor(secondsLeft / 60)).padStart(2, "0"),
+    seconds: String(secondsLeft % 60).padStart(2, "0"),
+  };
+}
+
+function RadarLogo() {
+  return (
+    <div className="vip-brand" aria-label="Radar de Perfumes">
+      <span className="vip-brand-rule" aria-hidden="true" />
+      <div className="vip-brand-lockup">
+        <div className="vip-brand-title">
+          <span>RADAR</span>
+          <svg className="vip-brand-radar" viewBox="0 0 68 68" fill="none" aria-hidden="true">
+            <path d="M7 26C18 11 35 6 53 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            <path d="M18 34C27 24 39 22 51 28" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            <path d="M29 42C35 36 41 36 47 40" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            <path d="M34 49L47 41" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            <circle cx="34" cy="49" r="3.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <span className="vip-brand-subtitle">DE PERFUMES</span>
+      </div>
+      <span className="vip-brand-rule" aria-hidden="true" />
+    </div>
+  );
+}
+
+function VacancyCountdown() {
+  const { minutes, seconds } = useVipCountdown();
+
+  return (
+    <section className="vip-countdown" aria-label="Contagem regressiva de dois minutos">
+      <h2 className="vip-countdown-heading">
+        <span className="vip-flame" aria-hidden="true">🔥</span>
+        <span>ÚLTIMAS VAGAS GRÁTIS</span>
+      </h2>
+      <p className="vip-countdown-caption">Restam poucas vagas</p>
+      <div className="vip-counter-clock" role="timer" aria-label={`${minutes} minutos e ${seconds} segundos restantes`}>
+        <div className="vip-counter-column">
+          <span className="vip-counter-number">{minutes}</span>
+          <span className="vip-counter-label">MINUTOS</span>
+        </div>
+        <span className="vip-counter-divider" aria-hidden="true">:</span>
+        <div className="vip-counter-column">
+          <span className="vip-counter-number">{seconds}</span>
+          <span className="vip-counter-label">SEGUNDOS</span>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Radar de Perfumes | Perfumes masculinos originais" },
-      { name: "description", content: "Receba ofertas selecionadas de perfumes masculinos originais direto no WhatsApp." },
-      { property: "og:title", content: "Radar de Perfumes | Perfumes masculinos originais" },
-      { property: "og:description", content: "Ofertas e cupons de perfumes masculinos no grupo VIP do WhatsApp." },
+      { title: "Radar de Perfumes | Entre no grupo VIP" },
+      { name: "description", content: "Ofertas selecionadas de perfumes masculinos. Acesse gratuitamente nosso grupo VIP de WhatsApp." },
+      { property: "og:title", content: "Radar de Perfumes | Grupo VIP" },
+      { property: "og:description", content: "Ofertas selecionadas de perfumes masculinos no WhatsApp." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -19,24 +103,36 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  useEffect(() => { countMetric("page_view"); return watchMetaPageView(); }, []);
+  useEffect(() => {
+    countMetric("page_view");
+    return watchMetaPageView();
+  }, []);
+
   return (
-    <main className="lux-bg flex min-h-screen justify-center overflow-hidden px-5 py-9 text-foreground sm:py-12">
-      <div className="flex w-full max-w-md flex-col items-center text-center">
-        <p className="flex items-center gap-3 text-xs text-gold">
-          <span className="h-px w-10 bg-gold/60" /> PERFUMES MASCULINOS <span className="h-px w-10 bg-gold/60" />
-        </p>
-        <h1 className="font-display mt-6 text-[2.75rem] leading-[1.05] sm:text-5xl">
-          Seu próximo perfume original com até <span className="text-gold-gradient block">60% de desconto</span>
-        </h1>
-        <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Receba ofertas selecionadas de perfumes masculinos direto no WhatsApp.
-        </p>
-        <div className="perfume-composition mt-5">
-          <img src={bottles.url} alt="Perfumes Sauvage, 1 Million e Bleu de Chanel" width="768" height="576" className="perfume-image" />
-        </div>
+    <main className="vip-landing">
+      <div className="vip-page">
+        <RadarLogo />
+
+        <header className="vip-intro">
+          <h1 className="vip-headline">
+            Entre no grupo VIP
+            <span>de perfumes</span>
+          </h1>
+          <p className="vip-subheading">Ofertas selecionadas de perfumes masculinos.</p>
+        </header>
+
+        <figure className="vip-perfumes">
+          <img
+            src={bottles.url}
+            alt="Seleção de frascos de perfumes masculinos"
+            width="768"
+            height="576"
+            fetchPriority="high"
+          />
+        </figure>
+
+        <VacancyCountdown />
         <GroupButtons />
-        <p className="mt-5 text-sm text-muted-foreground">Ofertas e cupons em um só lugar.</p>
       </div>
     </main>
   );
