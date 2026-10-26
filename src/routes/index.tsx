@@ -93,7 +93,11 @@ function Index() {
           <p className="vip-kicker">PERFUMARIA MASCULINA</p>
           <h1 className="vip-headline">
             <span className="vip-headline-main">ENTRE NO GRUPO VIP</span>
-            <span className="vip-headline-offer">PERFUMES ORIGINAIS COM ATÉ 60% DE DESCONTO</span>
+            <span className="vip-headline-offer">
+              <span className="vip-offer-line">PERFUMES ORIGINAIS</span>
+              <span className="vip-offer-line">COM ATÉ 60%</span>
+              <span className="vip-offer-line">DE DESCONTO</span>
+            </span>
           </h1>
         </header>
 
