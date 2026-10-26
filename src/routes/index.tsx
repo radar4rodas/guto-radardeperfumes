@@ -41,28 +41,6 @@ function useVipCountdown() {
   };
 }
 
-function RadarLogo() {
-  return (
-    <div className="vip-brand" aria-label="Radar de Perfumes">
-      <span className="vip-brand-rule" aria-hidden="true" />
-      <div className="vip-brand-lockup">
-        <div className="vip-brand-title">
-          <span>RADAR</span>
-          <svg className="vip-brand-radar" viewBox="0 0 68 68" fill="none" aria-hidden="true">
-            <path d="M7 26C18 11 35 6 53 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-            <path d="M18 34C27 24 39 22 51 28" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-            <path d="M29 42C35 36 41 36 47 40" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-            <path d="M34 49L47 41" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-            <circle cx="34" cy="49" r="3.5" fill="currentColor"/>
-          </svg>
-        </div>
-        <span className="vip-brand-subtitle">DE PERFUMES</span>
-      </div>
-      <span className="vip-brand-rule" aria-hidden="true" />
-    </div>
-  );
-}
-
 function VacancyCountdown() {
   const { minutes, seconds } = useVipCountdown();
 
@@ -111,14 +89,11 @@ function Index() {
   return (
     <main className="vip-landing">
       <div className="vip-page">
-        <RadarLogo />
-
         <header className="vip-intro">
           <h1 className="vip-headline">
-            Entre no grupo VIP
-            <span>de perfumes</span>
+            <span className="vip-headline-main">ENTRE NO GRUPO VIP</span>
+            <span className="vip-headline-offer">PERFUMES ORIGINAIS COM ATÉ 60% DE DESCONTO</span>
           </h1>
-          <p className="vip-subheading">Ofertas selecionadas de perfumes masculinos.</p>
         </header>
 
         <figure className="vip-perfumes">
