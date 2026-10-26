@@ -290,13 +290,6 @@
   font-weight: 600;
   letter-spacing: .31em;
 }
-.vip-kicker::before, .vip-kicker::after {
-  content: "";
-  width: clamp(23px, 8vw, 50px);
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(229, 177, 93, .78));
-}
-.vip-kicker::after { transform: rotate(180deg); }
 .vip-headline {
   display: flex;
   flex-direction: column;
