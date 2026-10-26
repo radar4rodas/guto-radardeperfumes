@@ -232,3 +232,295 @@
 .consent-btn { border-radius: 6px; padding: 5px 12px; font-size: 11px; font-weight: 600; line-height: 1.2; }
 .consent-accept { background: var(--whatsapp-deep); color: var(--whatsapp-foreground); }
 .consent-reject { background: transparent; color: var(--muted-foreground); border: 1px solid oklch(1 0 0 / 0.18); }
+
+/* Radar de Perfumes — premium, responsive WhatsApp landing page. */
+.vip-landing {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  color: #fffaf3;
+  background:
+    radial-gradient(ellipse 48% 35% at 51% 53%, rgba(147, 74, 22, .38) 0%, transparent 78%),
+    radial-gradient(ellipse 12% 40% at -5% 25%, rgba(181, 92, 27, .46) 0%, transparent 92%),
+    radial-gradient(ellipse 12% 36% at 105% 31%, rgba(189, 96, 23, .42) 0%, transparent 92%),
+    linear-gradient(180deg, #080504 0%, #110906 46%, #140a06 71%, #070403 100%);
+}
+.vip-landing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .55;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 11% 44%, rgba(255, 161, 44, .58) 0, rgba(255, 161, 44, .08) 3%, transparent 10%),
+    radial-gradient(circle at 85% 39%, rgba(252, 175, 65, .40) 0, transparent 11%),
+    radial-gradient(circle at 51% 49%, rgba(255, 171, 70, .22), transparent 19%);
+  filter: blur(16px);
+}
+.vip-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 550px);
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(24px, 4vh, 44px) 18px clamp(24px, 4vh, 44px);
+  text-align: center;
+}
+.vip-brand {
+  display: flex;
+  width: 100%;
+  max-width: 425px;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2.4vw, 20px);
+  color: #f1c668;
+}
+.vip-brand-rule {
+  flex: 1 1 0;
+  height: 1px;
+  max-width: 54px;
+  background: linear-gradient(90deg, transparent, #efc061);
+}
+.vip-brand-rule:last-child { transform: rotate(180deg); }
+.vip-brand-lockup { display: flex; flex-direction: column; align-items: center; }
+.vip-brand-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(45px, 10vw, 67px);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(54px, 12vw, 83px);
+  line-height: .8;
+  font-weight: 600;
+  letter-spacing: -.065em;
+  text-shadow: 0 3px 24px rgba(247, 158, 39, .26);
+}
+.vip-brand-radar {
+  width: clamp(30px, 7vw, 48px);
+  height: clamp(30px, 7vw, 48px);
+  margin-left: -2px;
+  align-self: flex-start;
+  transform: translateY(-6px);
+}
+.vip-brand-subtitle {
+  margin-top: 5px;
+  padding-left: .24em;
+  font-size: clamp(10px, 2.2vw, 14px);
+  letter-spacing: .45em;
+  font-weight: 500;
+}
+.vip-intro { margin-top: clamp(27px, 5.2vh, 54px); width: 100%; }
+.vip-headline {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(38px, 9.1vw, 60px);
+  font-weight: 600;
+  line-height: .92;
+  letter-spacing: -.033em;
+  text-wrap: balance;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, .45);
+}
+.vip-headline span {
+  display: block;
+  margin-top: 3px;
+  font-size: 1.18em;
+  white-space: nowrap;
+  background: linear-gradient(180deg, #fff1af 0%, #f4cc76 43%, #d79b3d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.vip-subheading {
+  margin: clamp(11px, 1.8vh, 18px) auto 0;
+  font-size: clamp(13px, 3.18vw, 17px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #f3eee8;
+  text-wrap: balance;
+}
+.vip-perfumes {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% + 36px);
+  max-width: 570px;
+  height: clamp(225px, 32vh, 345px);
+  margin: clamp(6px, 1.5vh, 16px) -18px clamp(8px, 1.6vh, 17px);
+  overflow: hidden;
+}
+.vip-perfumes::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 12% 4% 10%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 158, 35, .24), transparent 70%);
+  filter: blur(18px);
+}
+.vip-perfumes::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 25%;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(17, 9, 6, .92), transparent);
+}
+.vip-perfumes img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, .55));
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 82%, transparent 100%);
+}
+.vip-countdown {
+  width: 100%;
+  max-width: 458px;
+  padding: clamp(14px, 2.4vh, 22px) 12px clamp(13px, 2.1vh, 21px);
+  border: 1.5px solid #e2aa4a;
+  border-radius: 19px;
+  background: linear-gradient(150deg, rgba(32, 17, 10, .95), rgba(9, 5, 4, .96) 62%);
+  box-shadow: 0 0 0 1px rgba(255, 190, 76, .17), 0 0 24px rgba(255, 153, 31, .18), inset 0 0 19px rgba(115, 55, 16, .12);
+}
+.vip-countdown-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  color: #f6cf76;
+  font-size: clamp(17px, 4.6vw, 25px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: .025em;
+  white-space: nowrap;
+}
+.vip-flame { font-size: 1.4em; line-height: 1; }
+.vip-countdown-caption {
+  margin: 8px auto 9px;
+  color: #e7dfd6;
+  font-size: clamp(11px, 2.7vw, 15px);
+  letter-spacing: .24em;
+}
+.vip-counter-clock {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  color: #f1c36d;
+}
+.vip-counter-column { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.vip-counter-number {
+  display: block;
+  min-width: 76px;
+  padding: 0 9px 3px;
+  border: 1px solid rgba(215, 152, 54, .40);
+  border-radius: 9px;
+  font-size: clamp(37px, 9.6vw, 58px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: .10em;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(#f9df93, #d39a43);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.vip-counter-divider {
+  padding-top: 0;
+  font-size: clamp(35px, 8.5vw, 52px);
+  line-height: 1;
+  color: #efc265;
+}
+.vip-counter-label {
+  font-size: clamp(8px, 2vw, 11px);
+  letter-spacing: .2em;
+  color: #e6e1db;
+}
+.vip-whatsapp-cta {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 3.2vw, 18px);
+  width: 100%;
+  max-width: 470px;
+  min-height: clamp(64px, 9vh, 82px);
+  margin-top: clamp(15px, 2.5vh, 24px);
+  padding: 14px 15px;
+  overflow: hidden;
+  border: 2px solid #4afb80;
+  border-radius: 999px;
+  color: #ffffff;
+  background: linear-gradient(180deg, #12e449, #06b73d 70%, #078f31);
+  box-shadow: 0 0 25px rgba(20, 247, 91, .26), 0 14px 32px rgba(2, 21, 7, .6), inset 0 1px 4px rgba(255, 255, 255, .22);
+  text-decoration: none;
+  animation: vip-cta-breathe 2.5s ease-in-out infinite;
+  transition: transform .18s ease, filter .18s ease;
+}
+.vip-whatsapp-cta::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -35%;
+  left: -40%;
+  width: 34%;
+  height: 180%;
+  transform: rotate(19deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+  animation: vip-cta-shine 3.5s ease-in-out infinite;
+}
+.vip-whatsapp-cta:hover { transform: translateY(-2px) scale(1.01); filter: brightness(1.07); }
+.vip-whatsapp-cta:focus-visible { outline: 3px solid #ffe5a0; outline-offset: 5px; }
+.vip-whatsapp-icon { width: clamp(34px, 8vw, 48px); height: clamp(34px, 8vw, 48px); flex-shrink: 0; }
+.vip-cta-divider { width: 1px; height: 38px; background: rgba(255,255,255,.55); }
+.vip-cta-label {
+  font-size: clamp(15px, 4.2vw, 24px);
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+  letter-spacing: -.02em;
+}
+.vip-cta-arrow { width: 22px; height: 24px; flex-shrink: 0; }
+@keyframes vip-cta-breathe {
+  0%, 100% { box-shadow: 0 0 18px rgba(25, 246, 89, .24), 0 14px 30px rgba(2, 21, 7, .56); }
+  50% { box-shadow: 0 0 0 5px rgba(16, 245, 81, .09), 0 0 34px rgba(20, 245, 91, .40), 0 14px 30px rgba(2, 21, 7, .56); }
+}
+@keyframes vip-cta-shine {
+  0%, 50% { left: -45%; }
+  85%, 100% { left: 120%; }
+}
+@media (min-width: 650px) {
+  .vip-headline { font-size: 62px; }
+  .vip-subheading { font-size: 17px; }
+}
+@media (max-width: 390px) {
+  .vip-page { padding-left: 14px; padding-right: 14px; }
+  .vip-headline { font-size: 36px; }
+  .vip-countdown { border-radius: 15px; }
+  .vip-perfumes { width: calc(100% + 28px); margin-left: -14px; margin-right: -14px; }
+  .vip-whatsapp-cta { gap: 10px; padding-inline: 11px; }
+  .vip-cta-label { font-size: clamp(14px, 4.4vw, 18px); }
+}
+@media (max-height: 740px) and (max-width: 600px) {
+  .vip-page { padding-top: 17px; padding-bottom: 16px; }
+  .vip-intro { margin-top: 22px; }
+  .vip-perfumes { height: 220px; margin-top: 4px; margin-bottom: 8px; }
+  .vip-countdown { padding-block: 12px; }
+  .vip-countdown-caption { margin-block: 5px; }
+  .vip-whatsapp-cta { margin-top: 12px; min-height: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vip-whatsapp-cta, .vip-whatsapp-cta::before { animation: none; }
+  .vip-whatsapp-cta:hover { transform: none; }
+}
