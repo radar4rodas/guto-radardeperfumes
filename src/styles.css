@@ -342,6 +342,9 @@
   max-width: 580px;
   height: clamp(235px, 33vh, 355px);
   margin: clamp(5px, 1vh, 12px) -18px clamp(5px, 1.2vh, 13px);
+  /* No solid panel behind the photo: the same page background stays visible. */
+  background: transparent;
+  overflow: visible;
 }
 .vip-hero-stage::before {
   content: "";
@@ -382,12 +385,49 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center;
   filter: drop-shadow(0 18px 22px rgba(0, 0, 0, .43));
-  /* Fade the photo into the page on all sides rather than displaying a rectangular photo. */
-  -webkit-mask-image: radial-gradient(ellipse 75% 72% at 50% 52%,
-    #000 44%, rgba(0, 0, 0, .98) 58%, rgba(0, 0, 0, .72) 73%, rgba(0, 0, 0, .18) 90%, transparent 100%);
-  mask-image: radial-gradient(ellipse 75% 72% at 50% 52%,
-    #000 44%, rgba(0, 0, 0, .98) 58%, rgba(0, 0, 0, .72) 73%, rgba(0, 0, 0, .18) 90%, transparent 100%);
+  /*
+   * Two masks intersect: the first dissolves the photo's FLOOR completely
+   * before its lower edge; the second dissolves the sides. A radial mask
+   * alone left the center of the photo visible until the hard crop line.
+   */
+  -webkit-mask-image:
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, .85) 10%,
+      #000 18%,
+      #000 62%,
+      rgba(0, 0, 0, .86) 69%,
+      rgba(0, 0, 0, .52) 77%,
+      rgba(0, 0, 0, .18) 86%,
+      transparent 98%),
+    linear-gradient(to right,
+      transparent 0%,
+      rgba(0, 0, 0, .55) 8%,
+      #000 18%,
+      #000 82%,
+      rgba(0, 0, 0, .55) 92%,
+      transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, .85) 10%,
+      #000 18%,
+      #000 62%,
+      rgba(0, 0, 0, .86) 69%,
+      rgba(0, 0, 0, .52) 77%,
+      rgba(0, 0, 0, .18) 86%,
+      transparent 98%),
+    linear-gradient(to right,
+      transparent 0%,
+      rgba(0, 0, 0, .55) 8%,
+      #000 18%,
+      #000 82%,
+      rgba(0, 0, 0, .55) 92%,
+      transparent 100%);
+  mask-composite: intersect;
 }
 .vip-countdown {
   width: 100%;
