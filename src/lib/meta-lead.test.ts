@@ -14,6 +14,7 @@ describe("Meta Pixel WhatsApp Lead tracking", () => {
   const fbq = vi.fn();
 
   beforeEach(() => {
+    window.history.replaceState({}, "", "/");
     window.localStorage.clear();
     fbq.mockReset();
     vi.mocked(countMetric).mockClear();
@@ -24,6 +25,7 @@ describe("Meta Pixel WhatsApp Lead tracking", () => {
   afterEach(() => {
     delete (window as PixelWindow).fbq;
     window.localStorage.clear();
+    window.history.replaceState({}, "", "/");
   });
 
   it("sends exactly one standard Lead to the configured Pixel, with an eventID", () => {
@@ -72,6 +74,42 @@ describe("Meta Pixel WhatsApp Lead tracking", () => {
     (window as PixelWindow).fbq = fbq;
     trackLeadOnce();
     expect(fbq).toHaveBeenCalledTimes(1);
+  });
+
+  it("allows a deliberate Meta Events Manager test after the browser has already clicked", () => {
+    window.localStorage.setItem(storageKey, "sent");
+    window.history.replaceState({}, "", "/?meta_test=1");
+
+    trackLeadOnce();
+    trackLeadOnce(); // Still one test Lead per page load.
+
+    expect(fbq).toHaveBeenCalledTimes(1);
+    expect(fbq.mock.calls[0][1]).toBe(PIXEL_ID);
+    expect(fbq.mock.calls[0][2]).toBe("Lead");
+    expect(countMetric).not.toHaveBeenCalled();
+    expect(window.localStorage.getItem(storageKey)).toBe("sent");
+
+    // Returning to the usual LP still respects the prior Lead receipt.
+    window.history.replaceState({}, "", "/");
+    __resetLeadForTests();
+    trackLeadOnce();
+    expect(fbq).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not mark a new production visitor as converted during a Meta test", () => {
+    window.history.replaceState({}, "", "/?meta_test=1");
+    trackLeadOnce();
+
+    expect(fbq).toHaveBeenCalledTimes(1);
+    expect(window.localStorage.getItem(storageKey)).toBeNull();
+    expect(countMetric).not.toHaveBeenCalled();
+
+    window.history.replaceState({}, "", "/");
+    trackLeadOnce();
+
+    expect(fbq).toHaveBeenCalledTimes(2);
+    expect(window.localStorage.getItem(storageKey)).toMatch(/^sent:/);
+    expect(countMetric).toHaveBeenCalledTimes(1);
   });
 
   it("rolls back the receipt when calling the Pixel throws, so a later click can retry", () => {
