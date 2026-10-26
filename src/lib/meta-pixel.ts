@@ -1,4 +1,4 @@
-export const PIXEL_ID = "1391985675598607";
+export const PIXEL_ID = "2485910075234563";
 
 // Meta Pixel installed once per document; PageView is emitted on initial load.
 export const PIXEL_SNIPPET = `(function(){
