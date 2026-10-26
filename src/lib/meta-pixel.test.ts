@@ -41,7 +41,8 @@ describe("Meta Pixel initialization", () => {
     expect(PIXEL_ID).toBe("2485910075234563");
     expect(w.__radarPixelStarted).toBe(true);
     expect(w.__radarMetaPvPending).toBe(true);
-    expect(w.fbq?.queue).toEqual([
+    // The official Meta stub queues JavaScript "arguments" objects.
+    expect(w.fbq?.queue?.map((args) => Array.from(args))).toEqual([
       ["init", PIXEL_ID],
       ["track", "PageView"],
     ]);
