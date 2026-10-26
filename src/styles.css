@@ -334,6 +334,19 @@
   display: block;
   white-space: nowrap;
 }
+.vip-offer-highlight {
+  margin-top: 3px;
+  font-size: clamp(24px, 6.7vw, 37px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -.035em;
+  background: linear-gradient(180deg, #fff1af 0%, #ffd36f 48%, #e0a03e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffd36f;
+  filter: drop-shadow(0 2px 8px rgba(230, 151, 42, .22));
+}
 .vip-hero-stage {
   position: relative;
   isolation: isolate;
