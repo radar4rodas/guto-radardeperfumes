@@ -90,21 +90,24 @@ function Index() {
     <main className="vip-landing">
       <div className="vip-page">
         <header className="vip-intro">
+          <p className="vip-kicker">PERFUMARIA MASCULINA</p>
           <h1 className="vip-headline">
             <span className="vip-headline-main">ENTRE NO GRUPO VIP</span>
             <span className="vip-headline-offer">PERFUMES ORIGINAIS COM ATÉ 60% DE DESCONTO</span>
           </h1>
         </header>
 
-        <figure className="vip-perfumes">
-          <img
-            src={bottles.url}
-            alt="Seleção de frascos de perfumes masculinos"
-            width="768"
-            height="576"
-            fetchPriority="high"
-          />
-        </figure>
+        <div className="vip-hero-stage">
+          <figure className="vip-perfumes">
+            <img
+              src={bottles.url}
+              alt="Seleção de frascos de perfumes masculinos"
+              width="768"
+              height="576"
+              fetchPriority="high"
+            />
+          </figure>
+        </div>
 
         <VacancyCountdown />
         <GroupButtons />
