@@ -12,7 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { PIXEL_SNIPPET } from "../lib/meta-pixel";
+import { PIXEL_ID, PIXEL_SNIPPET } from "../lib/meta-pixel";
 
 function NotFoundComponent() {
   return (
@@ -111,6 +111,15 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
+            alt=""
+          />
+        </noscript>
         <Scripts />
       </body>
     </html>
